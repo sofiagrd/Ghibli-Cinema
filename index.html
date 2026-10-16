@@ -1,0 +1,157 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f1e6">
+  <meta name="description" content="Explora el cine de Studio Ghibli: películas, directores, años y sinopsis.">
+  <title>Ghibli Cinema — Un viaje entre mundos</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://ghibliapi.vercel.app">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="navbar">
+    <a href="#" class="brand">
+      <span class="brand-icon">森</span>
+      <span>ghibli<span class="brand-light"> cinema</span></span>
+    </a>
+
+    <nav>
+      <a href="#inicio">Inicio</a>
+      <a href="#catalogo">Películas</a>
+      <a href="#favoritos">Mis favoritas <span id="favoriteCount">0</span></a>
+    </nav>
+
+    <button id="themeToggle" class="theme-button" aria-label="Cambiar tema">
+      ☾
+    </button>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="hero-copy">
+        <span class="eyebrow"><span class="dot"></span> UNA VENTANA A OTROS MUNDOS</span>
+        <h1>Historias que<br>florecen <em>para siempre.</em></h1>
+        <p>Un rincón para perderse entre bosques encantados,
+          castillos en el aire y pequeños grandes milagros.
+          Descubre el universo cinematográfico de Studio Ghibli.</p>
+        <a href="#catalogo" class="main-button">Explorar películas <span>↗</span></a>
+        <div class="hero-note">
+          <span>✳</span> Prepara el té. Tu próxima aventura comienza aquí.
+        </div>
+      </div>
+
+      <div class="hero-art" aria-label="Ilustración decorativa de un bosque mágico">
+        <div class="sun"></div>
+        <div class="hill hill-back"></div>
+        <div class="hill hill-front"></div>
+        <div class="tree tree-left">♣</div>
+        <div class="tree tree-right">♣</div>
+        <div class="totoro">
+          <div class="totoro-ears"><i></i><i></i></div>
+          <div class="totoro-body">
+            <div class="totoro-eyes"><i></i><i></i></div>
+            <div class="totoro-belly">⌁ ⌁<br>⌁ ⌁</div>
+          </div>
+        </div>
+        <span class="kodama kodama-one">●</span>
+        <span class="kodama kodama-two">●</span>
+        <span class="floating-leaf">✿</span>
+        <span class="art-caption">un poquito de magia cotidiana</span>
+      </div>
+    </section>
+
+    <section id="catalogo" class="catalog section-wrap">
+      <div class="section-title">
+        <div>
+          <span class="eyebrow">LA COLECCIÓN</span>
+          <h2>El rincón de las películas</h2>
+          <p>Clásicos para volver a ver. Mundos nuevos por descubrir.</p>
+        </div>
+        <span class="film-count" id="filmCount">Buscando historias...</span>
+      </div>
+
+      <div class="search-box">
+        <span aria-hidden="true">⌕</span>
+        <input id="searchInput" type="search"
+          placeholder="Buscar por título o sinopsis..."
+          autocomplete="off">
+        <button id="clearSearch" aria-label="Limpiar búsqueda">✕</button>
+      </div>
+
+      <div class="filter-row">
+        <label>
+          <span>DIRECTOR</span>
+          <select id="directorFilter">
+            <option value="">Todos los directores</option>
+          </select>
+        </label>
+
+        <label>
+          <span>ORDENAR POR</span>
+          <select id="sortFilter">
+            <option value="year-asc">Año: más antiguas</option>
+            <option value="year-desc">Año: más recientes</option>
+            <option value="title-asc">Título: A–Z</option>
+            <option value="title-desc">Título: Z–A</option>
+          </select>
+        </label>
+
+        <label class="check-label">
+          <input type="checkbox" id="favoritesOnly">
+          Solo favoritas
+        </label>
+
+        <button id="resetFilters" class="text-button">Restablecer ↺</button>
+      </div>
+
+      <div id="filmGrid" class="film-grid" aria-live="polite">
+        <div class="loading">Los espíritus del bosque están preparando el catálogo...</div>
+      </div>
+    </section>
+
+    <section class="quote-section">
+      <span class="quote-flower">✿</span>
+      <blockquote>
+        Hay mundos extraordinarios escondidos
+        en las cosas más sencillas.
+      </blockquote>
+      <p>UN PEQUEÑO RECORDATORIO PARA SOÑAR</p>
+      <span class="quote-kodama" aria-hidden="true">● ●</span>
+    </section>
+
+    <section id="favoritos" class="favorites-section section-wrap">
+      <div class="section-title">
+        <div>
+          <span class="eyebrow">TU PEQUEÑA COLECCIÓN</span>
+          <h2>Películas para guardar en el corazón</h2>
+          <p>Marca el corazón de una película para encontrarla aquí.</p>
+        </div>
+      </div>
+      <div id="favoriteGrid" class="film-grid">
+        <div class="empty-state">Todavía no has guardado películas.</div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-mark">森</div>
+    <p>Hecho para quienes todavía creen en la magia.</p>
+    <small>Catálogo de fans sin afiliación oficial con Studio Ghibli.</small>
+    <p><a href="https://ghibliapi.vercel.app/#" target="_blank" rel="noreferrer">
+      Datos: Ghibli API ↗
+    </a></p>
+  </footer>
+
+  <dialog id="filmDialog">
+    <button id="closeDialog" class="close-dialog" aria-label="Cerrar ficha">✕</button>
+    <div id="filmDetails"></div>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
